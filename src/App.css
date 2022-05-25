@@ -1,38 +1,179 @@
-.App {
+:root {
+  --col-count: 30;
+  --alive-color: #000;
+  --dead-color: transparent;
+  --cell-size: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: #faebd7;
+}
+
+h1 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.grid-options-container p {
+  text-align: end;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.grid-options-container {
   display: flex;
   flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.grid-options__buttons-container {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 1em;
 }
 
-.App-link {
-  color: #61dafb;
+.grid-options-container button {
+  padding: 0.25em 0.5em;
+  background: #0077c6;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #eee;
+  width: 125px;
+  height: 40px;
+  cursor: pointer;
+}
+.grid-options-container button:disabled {
+  background: #787878;
+  cursor: not-allowed;
+}
+.grid-options-container button:hover:not([disabled]) {
+  background: #0087e1;
+}
+.grid-options__buttons-container .form-selector {
+  flex: 1;
 }
 
-@keyframes App-logo-spin {
+.grid-options-container form {
+  display: flex;
+  gap: 1rem;
+  align-self: center;
+}
+.grid-options-container form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.grid-options-container form button {
+  width: 150px;
+  margin-left: 1rem;
+  align-self: flex-end;
+}
+
+.grid-options-container form input {
+  padding: 0.5em;
+  font-size: 1rem;
+}
+
+.form-option {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), var(--cell-size));
+  place-content: center;
+  gap: 13px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.grid__item {
+  border: 2px solid #646464;
+  border-radius: 50%;
+  height: var(--cell-size);
+  width: var(--cell-size);
+  margin: 0 auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+dialog {
+  top: 20%;
+  width: 400px;
+  height: 150px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f0f8ff;
+  box-shadow: 0 0 10px #000;
+}
+
+dialog::backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #040a1ecc;
+  animation: none;
+}
+
+dialog[open]::backdrop {
+  animation: show-backdrop 0.5s ease 0s normal;
+}
+@keyframes show-backdrop {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
   }
+}
+
+dialog[open] {
+  left: 50%;
+  transform: translateX(-50%);
+  animation: show 1s ease normal;
+}
+@keyframes show {
+  from {
+    top: 0;
+  }
+  to {
+    top: 20%;
+  }
+}
+
+dialog button {
+  background: #0077c6;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #eee;
+  width: 100px;
+  height: 40px;
+  margin-top: 1.5rem;
+  cursor: pointer;
 }
